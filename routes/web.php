@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\PETUGASController;
+use App\Http\Controllers\AGENController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::get('/data',[PETUGASController::class,"index"]);
+
+Route::get('/agen',[AGENController::class,"index"]);
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
 });
