@@ -1,3 +1,5 @@
+<!-- app.blade.php -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -23,6 +25,12 @@
             height: 100vh;
             background-color: #006400; /* Dark background color */
             color: white; /* Text color */
+            width: 200px; /* Adjust sidebar width as needed */
+            position: fixed;
+            top: 56px; /* Adjust based on your top bar height */
+            left: 0;
+            bottom: 0;
+            overflow-y: auto; /* Enable vertical scrolling if content is too long */
         }
 
         .sidebar a {
@@ -30,10 +38,15 @@
         }
 
         .content {
-    padding: 15px;
-    text-align: center; /* Use text-align instead of align */
-    margin: 0 auto; /* Add margin: 0 auto to center the element horizontally */}
+            padding: 10px;
+            text-align: center; 
+            margin: 0 auto; /* Add margin: 0 auto to center the element horizontally */
+        }
 
+        /* Add class flex-grow-1 to fill remaining space next to sidebar */
+        .flex-grow-1 {
+            flex-grow: 1;
+        }
     </style>
 </head>
 
@@ -58,7 +71,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/data-agen">
+                    <a class="nav-link" href="/agen">
                         <i class="fas fa-address-card"></i> Data Agen
                     </a>
                 </li>
@@ -72,7 +85,7 @@
         </nav>
 
         <!-- Main Content -->
-        <div class="content">
+        <div class="content flex-grow-1"> <!-- Add flex-grow-1 class to fill remaining space -->
             @yield('content')
         </div>
     </div>

@@ -12,8 +12,8 @@ class PETUGASController extends Controller
      */
     public function index()
     {
-        $data = petugas::all();
-        return view ('data.data',compact('data'));
+        $data = Petugas::all();
+        return view('data.data', compact('data'));
     }
 
     /**
@@ -21,7 +21,7 @@ class PETUGASController extends Controller
      */
     public function create()
     {
-        //
+        return view('data.data_create');
     }
 
     /**
@@ -29,53 +29,59 @@ class PETUGASController extends Controller
      */
     public function store(Request $request)
     {
-       $save = new petugas;
-       $save->nama_petugas = $request->nama_petugas;
-       $save->nomor_petugas = $request->nomor_petugas;
-       $save->alamat = $request->alamat;
-       $save->save();
+        $request->validate([
+            'nama_petugas' => 'required',
+            'nomor_petugas' => 'required',
+            'alamat' => 'required',
+        ]);
 
-        return "Berhasil Menyimpan Data";
-    }
+        Petugas::create([
+            'nama_petugas' => $request->nama_petugas,
+            'nomor_petugas' => $request->nomor_petugas,
+            'alamat' => $request->alamat,
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
-    {
-        $data = petugas::all()->where('id', $request->id)->first();
-        return $data;
+        return redirect()->route('petugas.index')->with('success', 'Berhasil Menyimpan Data');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $data = petugas::all()->where('id', $request->id)->first();
-        $data->nama_petugas = $request->nama_petugas;
-        $data->nomor_petugas = $request->nomor_petugas;
-        $data->alamat = $request->alamat;
-        $data->save();
+        $petugas = Petugas::findOrFail($id);
 
-        return "Berhasil Mengubah Data";
+        return view('data.data_edit', compact('petugas'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'nama_petugas' => 'required',
+            'nomor_petugas' => 'required',
+            'alamat' => 'required',
+        ]);
+
+        $petugas = Petugas::findOrFail($id);
+
+        $petugas->update([
+            'nama_petugas' => $request->nama_petugas,
+            'nomor_petugas' => $request->nomor_petugas,
+            'alamat' => $request->alamat,
+        ]);
+
+        return redirect()->route('petugas.index')->with('success', 'Berhasil Mengupdate Data');
+    }
+    public function destroy($id)
+    {
+    $petugas = Petugas::findOrFail($id);
+    $petugas->delete();
+
+    return redirect()->route('petugas.index')->with('success', 'Berhasil Menghapus Data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $del = petugas::all()->where('id', $request->id)->first();
-        $del->delete();
-        return "Berhasil Menghapus Data";
-    }
+    // ... other methods ...
 }

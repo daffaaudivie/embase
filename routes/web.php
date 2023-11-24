@@ -21,9 +21,20 @@ Route::get('/', function () {
 });
 
 Route::get('/data',[PETUGASController::class,"index"]);
+Route::get('/data/create', [PETUGASController::class, 'create'])->name('data.create');
+Route::get('/data/edit/{id}', [PETUGASController::class, 'edit'])->name('data.edit');
+Route::put('/petugas/{id}', [PETUGASController::class, 'update'])->name('petugas.update');
+Route::delete('/petugas/{id}', [PETUGASController::class, 'destroy'])->name('petugas.destroy');
+
+Route::post('/petugas', [PETUGASController::class, 'store'])->name('petugas.store');
+Route::get('/data', [PETUGASController::class, 'index'])->name('petugas.index');
+
+
 
 Route::get('/agen',[AGENController::class,"index"]);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 });
+
+
