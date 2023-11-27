@@ -16,49 +16,64 @@
 
     <!-- Custom CSS -->
     <style>
-        /* Add your custom styles here */
         body {
             padding-top: 56px; /* Adjust based on your top bar height */
+            background-color: #e9ecef;
+        }
+
+        .navbar {
+            background-color: #9ACE8B; /* Light green background color for the entire top bar */
+        }
+
+        #embase-header {
+            padding: 3px; /* Adjust padding as needed */
+            color: white; /* Text color */
+            text-align: center;
         }
 
         .sidebar {
             height: 100vh;
-            background-color: #006400; /* Dark background color */
-            color: white; /* Text color */
-            width: 200px; /* Adjust sidebar width as needed */
+            background-color: #ffffff; /* White background color for the sidebar */
+            color: grey;
+            width: 210px;
             position: fixed;
-            top: 56px; /* Adjust based on your top bar height */
+            top: 56px;
             left: 0;
             bottom: 0;
-            overflow-y: auto; /* Enable vertical scrolling if content is too long */
+            overflow-y: auto;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adding shadow on the right side */
+        }
+
+        .sidebar-header {
+            background-color: #ffffff; /* Green background color for the top of the sidebar */
+            padding: 15px;
+            color: grey;
         }
 
         .sidebar a {
-            color: white;
+            color: grey;
         }
 
         .content {
             padding: 10px;
-            text-align: center; 
-            margin: 0 auto; /* Add margin: 0 auto to center the element horizontally */
-        }
-
-        /* Add class flex-grow-1 to fill remaining space next to sidebar */
-        .flex-grow-1 {
-            flex-grow: 1;
+            margin-left: 200px;
         }
     </style>
 </head>
 
 <body>
     <!-- Top Bar -->
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-        <a class="navbar-brand" href="#">EMBASE</a>
+    <nav class="navbar navbar-dark fixed-top">
+        <div id="embase-header">
+            <a class="navbar-brand" href="#">EMBASE</a>
+        </div>
     </nav>
 
-    <!-- Sidebar -->
     <div class="d-flex">
         <nav class="sidebar">
+            <div class="sidebar-header">
+                Menu Admin
+            </div>
             <ul class="nav flex-column">
                 <li class="nav-item">
                     <a class="nav-link" href="/dashboard">
@@ -71,21 +86,22 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/agen">
-                        <i class="fas fa-address-card"></i> Data Agen
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/data-pangkalan">
+                    <a class="nav-link" href="/pangkalan">
                         <i class="fas fa-building"></i> Data Pangkalan
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/transaksi">
+                        <i class="fas fa-address-card"></i> Data Transaksi
+                    </a>
+                </li>
+                
                 <!-- Add more links as needed -->
             </ul>
         </nav>
 
         <!-- Main Content -->
-        <div class="content flex-grow-1"> <!-- Add flex-grow-1 class to fill remaining space -->
+        <div class="content">
             @yield('content')
         </div>
     </div>

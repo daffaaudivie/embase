@@ -12,8 +12,16 @@ class PANGKALANController extends Controller
      */
     public function index()
     {
-        $data = pangkalan::all();
-        return $data;
+        $pangkalan = Pangkalan::all();
+        return view('pangkalan.pangkalan', compact('pangkalan'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        return view('pangkalan.pangkalan_create');
     }
 
     /**
@@ -21,59 +29,59 @@ class PANGKALANController extends Controller
      */
     public function store(Request $request)
     {
-       $save = new pangkalan;
-       $save->nama_pangkalan = $request->nama_pangkalan;
-       $save->nomor_pangkalan = $request->nomor_pangkalan;
-       $save->alamat = $request->alamat;
-       $save->save();
+        $request->validate([
+            'nama_pangkalan' => 'required',
+            'nomor_pangkalan' => 'required',
+            'alamat' => 'required',
+        ]);
 
-        return "Berhasil Menyimpan Data";
-    }
+        Pangkalan::create([
+            'nama_pangkalan' => $request->nama_pangkalan,
+            'nomor_pangkalan' => $request->nomor_pangkalan,
+            'alamat' => $request->alamat,
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Request $request)
-    {
-        $data = pangkalan::find($request->id);
-        return $data;
+        return redirect()->route('pangkalan.index')->with('success', 'Berhasil Menyimpan Data');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Request $request)
+    public function edit($id)
     {
-        $data = pangkalan::find($request->id);
-        $data->nama_pangkalan = $request->nama_pangkalan;
-        $data->nomor_pangkalan = $request->nomor_pangkalan;
-        $data->alamat = $request->alamat;
-        $data->save();
+        $Pangkalan = Pangkalan::findOrFail($id);
 
-        return "Berhasil Mengubah Data";
+        return view('pangkalan.pangkalan_edit', compact('Pangkalan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        $data = pangkalan::find($id);
-        $data->nama_pangkalan = $request->nama_pangkalan;
-        $data->nomor_pangkalan = $request->nomor_pangkalan;
-        $data->alamat = $request->alamat;
-        $data->save();
+        $request->validate([
+            'nama_pangkalan' => 'required',
+            'nomor_pangkalan' => 'required',
+            'alamat' => 'required',
+        ]);
 
-        return "Berhasil Memperbarui Data";
+        $Pangkalan = Pangkalan::findOrFail($id);
+
+        $Pangkalan->update([
+            'nama_pangkalan' => $request->nama_pangkalan,
+            'nomor_pangkalan' => $request->nomor_pangkalan,
+            'alamat' => $request->alamat,
+        ]);
+
+        return redirect()->route('pangkalan.index')->with('success', 'Berhasil Mengupdate Data');
+    }
+    public function destroy($id)
+    {
+    $pangkalan = Pangkalan::findOrFail($id);
+    $pangkalan->delete();
+
+    return redirect()->route('pangkalan.index')->with('success', 'Berhasil Menghapus Data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        $del = Pangkalan::find($id);
-        $del->delete();
-        return "Berhasil Menghapus Data";
-    }
+    // ... other methods ...
 }

@@ -12,7 +12,8 @@ class TRANSAKSIController extends Controller
      */
     public function index()
     {
-        //
+        $transaksi = Transaksi::all();
+        return view('transaksi.transaksi', compact('transaksi'));
     }
 
     /**
@@ -20,7 +21,7 @@ class TRANSAKSIController extends Controller
      */
     public function create()
     {
-        //
+        return view('transaksi.transaksi_create');
     }
 
     /**
@@ -28,38 +29,68 @@ class TRANSAKSIController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'id_petugas' => 'required',
+            'id_pangkalan' => 'required',
+            'jumlah' => 'required',
+            'harga' => 'required',
+            'date' => 'required',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
+        Pangkalan::create([
+            'id_petugas' => $request->id_petugas,
+            'id_pangkalan' => $request->id_pangkalan,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga,
+            'date' => $request->date,
+        ]);
+
+        return redirect()->route('transaksi.index')->with('success', 'Berhasil Menyimpan Data');
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $Trasaksi = Trasaksi::findOrFail($id);
+
+        return view('transaksi.transaksi_edit', compact('Transaksi'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'id_petugas' => 'required',
+            'id_pangkalan' => 'required',
+            'jumlah' => 'required',
+            'harga' => 'required',
+            'date' => 'required',
+        ]);
+
+        $Pangkalan = Pangkalan::findOrFail($id);
+
+        $Pangkalan->update([
+            'id_petugas' => $request->id_petugas,
+            'id_pangkalan' => $request->id_pangkalan,
+            'jumlah' => $request->jumlah,
+            'harga' => $request->harga,
+            'date' => $request->date,
+            
+        ]);
+
+        return redirect()->route('transaksi.index')->with('success', 'Berhasil Mengupdate Data');
+    }
+    public function destroy($id)
+    {
+    $transaksi = Transaksi::findOrFail($id);
+    $transaksi->delete();
+
+    return redirect()->route('transaksi.index')->with('success', 'Berhasil Menghapus Data');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
+    // ... other methods ...
 }
