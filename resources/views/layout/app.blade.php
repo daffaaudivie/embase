@@ -16,49 +16,52 @@
 
     <!-- Custom CSS -->
     <style>
-        body {
-            padding-top: 56px; /* Adjust based on your top bar height */
-            background-color: #e9ecef;
-        }
+    body {
+        padding-top: 56px; /* Adjust based on your top bar height */
+        background-color: #e9ecef;
+    }
 
-        .navbar {
-            background-color: #9ACE8B; /* Light green background color for the entire top bar */
-        }
+    .navbar {
+        background-color: #9ACE8B; /* Light green background color for the entire top bar */
+    }
 
-        #embase-header {
-            padding: 3px; /* Adjust padding as needed */
-            color: white; /* Text color */
-            text-align: center;
-        }
+    #embase-header {
+        padding: 3px; /* Adjust padding as needed */
+        color: white; /* Text color */
+        text-align: center;
+    }
 
-        .sidebar {
-            height: 100vh;
-            background-color: #ffffff; /* White background color for the sidebar */
-            color: grey;
-            width: 210px;
-            position: fixed;
-            top: 56px;
-            left: 0;
-            bottom: 0;
-            overflow-y: auto;
-            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adding shadow on the right side */
-        }
+    .sidebar {
+        height: 100vh;
+        background-color: #ffffff; /* White background color for the sidebar */
+        color: grey;
+        width: 210px;
+        position: fixed;
+        right: 10;
+        top: 56px;
+        left: 0;
+        bottom: 100;
+        overflow-y: auto;
+        box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Adding shadow on the right side */
+    }
 
-        .sidebar-header {
-            background-color: #ffffff; /* Green background color for the top of the sidebar */
-            padding: 15px;
-            color: grey;
-        }
+    .sidebar-header {
+        background-color: #ffffff; /* Green background color for the top of the sidebar */
+        padding: 15px;
+        color: grey;
+    }
 
-        .sidebar a {
-            color: grey;
-        }
+    .sidebar a {
+        color: grey;
+    }
 
-        .content {
-            padding: 10px;
-            margin-left: 200px;
-        }
-    </style>
+    .content {
+        padding: 5.0rem;
+        margin-left: 200px;
+        margin-right: 10; /* Set the right margin to 0 */
+    }
+</style>
+
 </head>
 
 <body>
@@ -93,6 +96,16 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/transaksi">
                         <i class="fas fa-address-card"></i> Data Transaksi
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pembayaran">
+                        <i class="fas fa-address-card"></i> Data Pembayaran
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/pengiriman">
+                        <i class="fas fa-address-card"></i> Data Pengiriman
                     </a>
                 </li>
                 

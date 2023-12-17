@@ -29,7 +29,8 @@
                     <th>Nama Petugas</th>
                     <th>Nama Pangkalan</th>
                     <th>Jumlah</th>
-                    <th>Harga</th>
+                    <th>Harga/Tabung</th>
+                    <th>Status</th>
                     <th>Tanggal</th>
                 </tr>
             </thead>
@@ -41,6 +42,7 @@
                         <td>{{ $baris->pangkalan->nama_pangkalan  }}</td>
                         <td>{{ $baris->jumlah }}</td>
                         <td>{{ $baris->harga }}</td>
+                        <td>{{ $baris->status_transaksi }}</td>
                         <td>{{ $baris->date }}</td>
                     </tr>
                 @endforeach
@@ -48,11 +50,11 @@
         </table>
     </div>
 
-    <div class="row mt-3">
+    <!-- <div class="row mt-3">
         <div class="col-md-12 text-right">
             <a class="btn btn-success" href="{{ route('transaksi.create') }}">Tambah Data</a>
         </div>
-    </div>
+    </div> -->
 </div>
 
 <script>

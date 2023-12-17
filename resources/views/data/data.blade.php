@@ -10,15 +10,20 @@
     }
 
     .table-container {
-        margin-top: 1.5rem; /* Sesuaikan nilai margin-top sesuai kebutuhan */
+        margin-top: 0.5rem; /* Sesuaikan nilai margin-top sesuai kebutuhan */
         margin-left: 3.0rem;
     }
 </style>
 
 <div class="container mt-6">
-    <div class="row">
+<div class="row">
         <div class="col-md-12 text-center">
-            <h1 style="font-size: 27px;">Data Petugas</h1>
+            <h1 style="font-size: 30px;">Data Petugas</h1>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col-md-12 text-right">
+            <a class="btn btn-success" href="{{ route('data.create') }}">Tambah Data +</a>
         </div>
     </div>
 
@@ -55,11 +60,7 @@
         </table>
     </div>
 
-    <div class="row mt-3">
-        <div class="col-md-12 text-right">
-            <a class="btn btn-success" href="{{ route('data.create') }}">Tambah Data</a>
-        </div>
-    </div>
+    
 </div>
 
 <script>

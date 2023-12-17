@@ -17,6 +17,16 @@ class TRANSAKSIController extends Controller
     }
 
     /**
+     * Display a listing of the resource for pengiriman.
+     */
+    public function pengiriman()
+    {
+        $transaksiForPengiriman = Transaksi::all();
+        return view('pengiriman.pengiriman', compact('transaksiForPengiriman'));
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      */
     public function create()
@@ -37,7 +47,7 @@ class TRANSAKSIController extends Controller
             'date' => 'required',
         ]);
 
-        Pangkalan::create([
+        Transaksi::create([
             'id_petugas' => $request->id_petugas,
             'id_pangkalan' => $request->id_pangkalan,
             'jumlah' => $request->jumlah,
@@ -53,9 +63,9 @@ class TRANSAKSIController extends Controller
      */
     public function edit($id)
     {
-        $Trasaksi = Trasaksi::findOrFail($id);
+        $transaksi = Transaksi::findOrFail($id);
 
-        return view('transaksi.transaksi_edit', compact('Transaksi'));
+        return view('transaksi.transaksi_edit', compact('transaksi'));
     }
 
     /**
@@ -71,26 +81,48 @@ class TRANSAKSIController extends Controller
             'date' => 'required',
         ]);
 
-        $Pangkalan = Pangkalan::findOrFail($id);
+        $transaksi = Transaksi::findOrFail($id);
 
-        $Pangkalan->update([
+        $transaksi->update([
             'id_petugas' => $request->id_petugas,
             'id_pangkalan' => $request->id_pangkalan,
             'jumlah' => $request->jumlah,
             'harga' => $request->harga,
             'date' => $request->date,
-            
         ]);
 
         return redirect()->route('transaksi.index')->with('success', 'Berhasil Mengupdate Data');
     }
+
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id)
     {
-    $transaksi = Transaksi::findOrFail($id);
-    $transaksi->delete();
+        $transaksi = Transaksi::findOrFail($id);
+        $transaksi->delete();
 
-    return redirect()->route('transaksi.index')->with('success', 'Berhasil Menghapus Data');
+        return redirect()->route('transaksi.index')->with('success', 'Berhasil Menghapus Data');
     }
 
-    // ... other methods ...
+    /**
+     * Update status pengiriman.
+     */
+     public function updateStatusPengiriman($id)
+    {
+        $transaksi = Transaksi::findOrFail($id);
+
+        if (!$transaksi) {
+            return redirect()->route('transaksi.pengiriman')->with('error', 'Transaksi not found');
+        }
+
+        // Lakukan pengecekan status dan update status pengiriman sesuai kondisi
+        if ($transaksiForPengiriman->status_pengiriman == 'Siap Dikirim') {
+            $transaksiForPengiriman->update(['status_pengiriman' => 'Dalam Pengiriman']);
+            return redirect()->route('transaksi.pengiriman')->with('success', 'Status Pengiriman berhasil diubah');
+        } else {
+            return redirect()->route('transaksi.pengiriman')->with('error', 'Status Pengiriman tidak dapat diubah');
+        }
+    }
+
 }

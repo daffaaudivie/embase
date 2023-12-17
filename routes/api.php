@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Models\Pangkalan;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\PETUGASController;
@@ -14,3 +15,8 @@ Route::post("create_data", [PETUGASController::class, "store"]);
 Route::post("show_data", [PETUGASController::class, "show"]);
 Route::post("edit_data", [PETUGASController::class, "edit"]);
 Route::post("delete_data", [PETUGASController::class, "destroy"]);
+
+Route::get('/all-pangkalan', function () {
+    $pangkalan = Pangkalan::all();
+    return $pangkalan;
+});

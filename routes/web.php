@@ -6,17 +6,7 @@ use App\Http\Controllers\PETUGASController;
 use App\Http\Controllers\AGENController;
 use App\Http\Controllers\PANGKALANController;
 use App\Http\Controllers\TRANSAKSIController;
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
+use App\Http\Controllers\PEMBAYARANController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -45,6 +35,29 @@ Route::put('/transaksi/{id}', [TRANSAKSIController::class, 'update'])->name('tra
 Route::delete('/transaksi/{id}', [TRANSAKSIController::class, 'destroy'])->name('transaksi.destroy');
 Route::post('/transaksi', [TRANSAKSIController::class, 'store'])->name('transaksi.store');
 Route::get('/transaksi', [TRANSAKSIController::class, 'index'])->name('transaksi.index');
+
+Route::get('/pembayaran',[PEMBAYARANController::class,"index"]);
+Route::get('/pembayaran/create', [PEMBAYARANController::class, 'create'])->name('pembayaran.create');
+Route::get('/pembayaran/edit/{id}', [PEMBAYARANController::class, 'edit'])->name('pembayaran.edit');
+Route::put('/pembayaran/{id}', [PEMBAYARANController::class, 'update'])->name('pembayaran.update');
+Route::delete('/pembayaran/{id}', [PEMBAYARANController::class, 'destroy'])->name('pembayaran.destroy');
+Route::post('/pembayaran', [PEMBAYARANController::class, 'store'])->name('pembayaran.store');
+Route::get('/pembayaran', [PEMBAYARANController::class, 'index'])->name('pembayaran.index');
+Route::patch('/updateStatus/{id}', [PEMBAYARANController::class, 'updateStatus'])->name('updateStatus');
+Route::get('/pembayaran/filter', [PEMBAYARANController::class, 'filterPembayaran'])->name('filterPembayaran');
+
+Route::get('/pengiriman', [TRANSAKSIController::class, 'pengiriman']);
+Route::get('/transaksi/pengiriman', [TRANSAKSIController::class, 'pengiriman'])
+    ->name('transaksi.pengiriman');
+
+Route::patch('/pengiriman/updateStatusPengiriman/{id}', [TRANSAKSIController::class, 'updateStatusPengiriman'])
+    ->name('pengiriman.updateStatusPengiriman');
+
+// ...
+
+
+
+
 
 
 Route::get('/agen',[AGENController::class,"index"]);
